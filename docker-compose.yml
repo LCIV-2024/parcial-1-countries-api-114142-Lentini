@@ -1,0 +1,29 @@
+services:
+  app:
+    container_name: "parcial-1"
+    image: 'parcial-country:1.0'
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    environment:
+      - DATABASE_URL=jdbc:mysql://mysqldb:3306/countries
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+    depends_on:
+      - mysqlDb
+  mysqlDb:
+    container_name: "mysqlDb"
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: 'countries'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+
+
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:
