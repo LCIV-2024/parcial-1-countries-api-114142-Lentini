@@ -13,8 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -33,6 +32,16 @@ public class CountryServiceTest {
     void getByNameTest() {
         Country country = countryService.getByName("Argentina");
         assertEquals("Arg", country.getCode());
+    }
+    @Test
+    void getByContinentTest() {
+        List<Country> response = countryService.getByContinent("Europe");
+        assertNotNull(response);
+    }
+    @Test
+    void getByLanguageTest() {
+        List<Country> response = countryService.getByLanguage("spanish");
+        assertNotNull(response);
     }
     @Test
     void postCountry(){
